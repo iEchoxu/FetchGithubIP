@@ -1,4 +1,4 @@
-module speedgithub-go
+module FetchGithubIP
 
 go 1.18
 
