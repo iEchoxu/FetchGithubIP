@@ -77,7 +77,7 @@ func fetchContent(url string) string {
 	}
 
 	req.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36")
-	req.Header.Add("cookie", "NID=511=eUbLvNl_qNeRtA5oEefKPncGtZwp-1vYU0yhGGDXauKyH2xF03SvvyPieMRHrQp-htP7Imn_FM1AAvEmvnrDFbXEhKEna1EPMmEl0pBDuG0iD8W-BqI7aNpaCy-kMQpNSwjej4hseYVRqI7gdXESxCHWjqQPn8cFh0J2VOQJOxQ")
+	req.Header.Add("referer", "https://github.com/?target=https://ipaddress.com/website/github.com") // 必须添加此行，不然会报错 403
 
 	resp, err := client.Do(req)
 	if err != nil || resp.StatusCode != 200 {
