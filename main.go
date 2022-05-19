@@ -77,7 +77,8 @@ func fetchContent(url string) string {
 	}
 
 	req.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36")
-	req.Header.Add("referer", "https://github.com/?target=https://ipaddress.com/website/github.com") // 必须添加此行，不然会报错 403
+	req.Header.Add("Referer", "https://github.com/")    // 必须添加此行，不然会报错 403
+	req.Header.Add("accept-language", "zh-CN,zh;q=0.9") // 必须添加此行，不然会报错 403
 
 	resp, err := client.Do(req)
 	if err != nil || resp.StatusCode != 200 {
@@ -386,7 +387,7 @@ func main() {
 	//fmt.Println("只解析到一个ip的域名：\n", domainIPList)
 	//fmt.Printf("得到的所有ip: %v\n", domainIPList)
 
-	updateHostsFile()
+	//updateHostsFile()
 
 	fmt.Printf("\nFetched %d/%d(total) sites in %.2fs seconds\n", len(domainIPList), len(GDomains), time.Since(start).Seconds())
 }
