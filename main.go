@@ -115,7 +115,8 @@ func parseGithubIp(url string) {
 		// 只解析到一个 ip 的域名，直接将其添加到 domainIPList 列表中，这个列表里的数据即最终 url:ip 对应的数据
 		domainIP := make(map[string]string)
 		ipstr := ipaddr[0]
-		fmt.Printf("%s 解析到的ip是： %v\n", url, ipstr)
+		DomainName := strings.Split(url, "/")[4]
+		fmt.Printf("%s 解析到的ip是： %v\n", DomainName, ipstr)
 		domainIP[url] = ipstr
 		domainIPList = append(domainIPList, domainIP)
 	}
@@ -196,11 +197,12 @@ func getLowRttIp(url string, ips []string) {
 	}
 	rttiplist = append(rttiplist, revorseList)
 
+	realDomainName := strings.Split(url, "/")[4]
 	// 从反转后的列表中通过 avgRtt 值获取到对应的 Ip
 	for _, allrttip := range rttiplist {
 		for rtt, ip := range allrttip {
 			if isEqual(rtt, minRtt) {
-				fmt.Printf("%s 解析到%d个ip ，最终ip(取最小Avgrtt值)为： %s\n", url, len(ips), ip)
+				fmt.Printf("%s 解析到%d个ip ，最终ip(取最小Avgrtt值)为： %s\n", realDomainName, len(ips), ip)
 				realiprttlist := make(map[string]string)
 				realiprttlist[url] = ip
 				domainIPList = append(domainIPList, realiprttlist) // 添加到最终的 url:ip 列表中
@@ -387,7 +389,7 @@ func main() {
 	//fmt.Println("只解析到一个ip的域名：\n", domainIPList)
 	//fmt.Printf("得到的所有ip: %v\n", domainIPList)
 
-	updateHostsFile()
+	//updateHostsFile()
 
 	fmt.Printf("\nFetched %d/%d(total) sites in %.2fs seconds\n", len(domainIPList), len(GDomains), time.Since(start).Seconds())
 }
