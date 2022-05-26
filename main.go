@@ -389,7 +389,7 @@ func main() {
 	//fmt.Println("只解析到一个ip的域名：\n", domainIPList)
 	//fmt.Printf("得到的所有ip: %v\n", domainIPList)
 
-	//updateHostsFile()
+	updateHostsFile()
 
 	fmt.Printf("\nFetched %d/%d(total) sites in %.2fs seconds\n", len(domainIPList), len(GDomains), time.Since(start).Seconds())
 }
